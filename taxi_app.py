@@ -1,7 +1,19 @@
 import streamlit as st
 import numpy as np
 import joblib
+import gdown
+import os
 from sklearn.preprocessing import StandardScaler
+
+# Function to download file from Google Drive
+def download_model(file_id, output_path='best_model_rf_top10.pkl'):
+    url = f'https://drive.google.com/uc?id={file_id}'
+    gdown.download(url, output_path, quiet=False)
+
+# Download the model file (run this only if the file doesn't exist)
+file_id = '1c_cLhpFgxoRgowgrfx90y49o-JwFMjAv'  # File ID from your Google Drive link
+if not os.path.exists('best_model_rf_top10.pkl'):
+    download_model(file_id)
 
 # Load the pre-trained model and scaler
 scaler = joblib.load('num_scaler.pkl')
